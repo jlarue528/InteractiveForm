@@ -1,5 +1,8 @@
-//Selecting the us
+//Selecting the name input & setting focus state to true
 const nameInput = document.querySelector('input[type="text"]');
 nameInput.focus();
 
-//Setting hte focus property of the element to true
+//Selecting Job Role Element
+
+
+
