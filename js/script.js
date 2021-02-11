@@ -1,17 +1,22 @@
-//Selecting the name input & setting focus state to true
+/*
+    Selecting the name input & setting focus state to true -
+    This will make the name input the default focus state
+*/
 const nameInput = document.querySelector('input[type="text"]');
 nameInput.focus();
 
 //Selecting Job Role Select Element
 const jobRole = document.getElementById('title');
-// console.log(jobRole);
 
-//Selecting Other Job Role Element & setting its display style to be hidden
+/*
+    Selecting Other Job Role Element & setting its display style to be hidden
+*/
 const otherJobRole = document.getElementById('other-job-role');
-// console.log(otherJobRole);
 otherJobRole.style.display = 'none';
 
-//Setting an event listener to watch job role element
+/*
+    Setting an event listener to watch job role element
+*/
 jobRole.addEventListener('change', (e) => {
     const jobSelected = e.target.value;
     if(jobSelected === 'other') {
@@ -25,12 +30,13 @@ jobRole.addEventListener('change', (e) => {
 const design = document.getElementById('design');
 const color = document.getElementById('color');
 const colorOptions = color.children;
-// console.log(colorOptions);
 
 //Setting color property to disabled
 color.disabled = true;
 
-//Add event listener to tshirt design dropdown 
+/*
+    Add event listener to t-shirt design dropdown
+*/ 
 design.addEventListener('change', (e) => {
    color.disabled = false;
    
@@ -40,8 +46,10 @@ design.addEventListener('change', (e) => {
        //data theme attribute of selected theme
         let dataTheme = colorOptions[i].getAttribute('data-theme');
 
-        //conditional statement - based on user's theme selection
-        //the color options for t-shirts will display
+        /*
+            conditional statement - based on user's theme selection
+            the color options for t-shirts will display
+        */
         if (themeSelection === dataTheme) {
             colorOptions[i].hidden = false;
             colorOptions[i].setAttribute('selected', true);
@@ -52,12 +60,16 @@ design.addEventListener('change', (e) => {
    }
 });
 
-//Selecting elements: register for activities & total activity cost element
+/*
+    Selecting elements: register for activities & total activity cost element
+*/
 const activities = document.getElementById('activities');
 const cost = document.getElementById('activities-cost');
 
-//Created event listener to keep track of activities selected and costs of each activity
-//to return the total cost of selected activities
+/*
+    Created event listener to keep track of activities selected and costs of each activity
+    to return the total cost of selected activities
+*/
 let totalCost = 0;
 activities.addEventListener('change', (e) => {
     const activityCost = e.target.getAttribute('data-cost');
@@ -78,11 +90,15 @@ const creditCard = document.getElementById('credit-card');
 const payPal = document.getElementById('paypal');
 const bitCoin = document.getElementById('bitcoin');
 
-//hiding Paypal & bitCoin payment methods
+/*
+    Hiding Paypal & bitCoin payment methods as default
+*/
 payPal.hidden = true;
 bitCoin.hidden = true;
 
-//setting default payment method to credit card
+/*
+    setting default payment method to credit card
+*/
 paymentMethod.children[1].setAttribute('selected', true);
 
 /*
