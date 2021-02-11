@@ -123,7 +123,72 @@ paymentMethod.addEventListener('change', (e) => {
     }
 });
 
+//Selecting Elements
+
+const email = document.getElementById('email');
+const cardNumber = document.getElementById('cc-num');
+const zipCode = document.getElementById('zip');
+const cvvNumber = document.getElementById('cvv');
+const form = document.getElementsByTagName('form')[0];
+
+/*
+    Helper functions used to validate input fields
+*/
+
+function emailValidator() {
+    const emailField = email.value;
+    const emailValidate = /^[^@]+@[^@.]+\.[A-Z]+$/i.test(emailField);
+    return emailValidate;
+}
+
+function nameValidator() {
+    const nameField = nameInput.value;
+    const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
+    return nameValidate;
+}
+
+function creditCardNumberValidator() {
+    const ccNumber = cardNumber.value;
+    const creditCardValidate = /^[\d]{13,16}$/.test(ccNumber)
+    return creditCardValidate;
+}
+
+function creditCardZipCodeValidator() {
+    const zipNumber = zipCode.value;
+    const zipCodeValidate = /^[\d]{5}$/.test(zipNumber);
+    return zipCodeValidate;
+}
+
+function cvvCodeValidator() {
+    const cvv = cvvNumber.value;
+    const cvvValidate = /^[\d]{3}$/.test(cvv);
+    return cvvValidate;
+}
+
+function checkboxValidator () {
+    let numberOfChecks = 0;
+    const checkBoxes = document.querySelectorAll('[type="checkbox"]');
+    for(let i = 1; i < checkBoxes.length; i++) {
+       if(checkBoxes[i].checked === true) {
+           numberOfChecks += 1
+       } else {
+           numberOfChecks;
+       }
+    }
+    return numberOfChecks;
+}
 
 
-
-
+form.addEventListener('submit', (e) => {
+    console.log(checkboxValidator() < 1)
+  
+    if(!nameValidator() && !emailValidator() && checkboxValidator() < 1) {
+        e.preventDefault();
+    }
+    
+    if(paymentMethod.value === 'credit-card') {
+        if(!creditCardNumberValidator() && !creditCardZipCodeValidator() && !cvvCodeValidator()) {
+            e.preventDefault();
+        }
+    }
+});
