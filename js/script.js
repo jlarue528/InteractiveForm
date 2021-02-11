@@ -72,6 +72,42 @@ activities.addEventListener('change', (e) => {
     cost.innerHTML = `Total: $${totalCost}`;
 });
 
+//Selecting payment method elements
+const paymentMethod = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const payPal = document.getElementById('paypal');
+const bitCoin = document.getElementById('bitcoin');
+
+//hiding Paypal & bitCoin payment methods
+payPal.hidden = true;
+bitCoin.hidden = true;
+
+//setting default payment method to credit card
+paymentMethod.children[1].setAttribute('selected', true);
+
+/*
+    Event listener added to detect which payment method the user selects -
+    Based on the payment method selected a user will have next step payment options
+*/
+paymentMethod.addEventListener('change', (e) => {
+    const paymentSelection = e.target.value;
+       
+    if(paymentSelection === 'paypal') {
+           payPal.hidden = false;
+           bitCoin.hidden = true;
+           creditCard.hidden = true;
+    } if (paymentSelection === 'credit-card') {
+           payPal.hidden = true;
+           bitCoin.hidden = true;
+           creditCard.hidden = false;
+    } if (paymentSelection === 'bitcoin') {
+        payPal.hidden = true;
+        bitCoin.hidden = false;
+        creditCard.hidden = true;
+    }
+});
+
+
 
 
 
