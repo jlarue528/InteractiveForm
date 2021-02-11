@@ -52,6 +52,26 @@ design.addEventListener('change', (e) => {
    }
 });
 
+//Selecting elements: register for activities & total activity cost element
+const activities = document.getElementById('activities');
+const cost = document.getElementById('activities-cost');
+
+//Created event listener to keep track of activities selected and costs of each activity
+//to return the total cost of selected activities
+let totalCost = 0;
+activities.addEventListener('change', (e) => {
+    const activityCost = e.target.getAttribute('data-cost');
+    const checkboxStatus = e.target;
+    
+    if(checkboxStatus.checked) {
+        totalCost = +activityCost + totalCost;
+    } else {
+        totalCost = totalCost - +activityCost;
+    }
+    
+    cost.innerHTML = `Total: $${totalCost}`;
+});
+
 
 
 
