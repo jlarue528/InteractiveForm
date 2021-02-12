@@ -70,8 +70,9 @@ const cost = document.getElementById('activities-cost');
     Created event listener to keep track of activities selected and costs of each activity
     to return the total cost of selected activities
 */
-let totalCost = 0;
+
 activities.addEventListener('change', (e) => {
+    let totalCost = 0;
     const activityCost = e.target.getAttribute('data-cost');
     const checkboxStatus = e.target;
     
@@ -136,38 +137,93 @@ const form = document.getElementsByTagName('form')[0];
 */
 
 function emailValidator() {
+    const parentElement = email.parentElement;
     const emailField = email.value;
     const emailValidate = /^[^@]+@[^@.]+\.[A-Z]+$/i.test(emailField);
+    console.log(emailValidate);
+    if(!emailValidate) {
+        parentElement.classList.add('not-valid');
+        parentElement.classList.remove('valid');
+        parentElement.lastElementChild.hidden = false;
+        console.log(parentElement);
+    } if (emailValidate) {
+        parentElement.classList.add('valid');
+        parentElement.classList.remove('not-valid');
+        parentElement.lastElementChild.hidden = true;
+        console.log(parentElement);
+    }
     return emailValidate;
 }
 
+
 function nameValidator() {
+    const parentElement = nameInput.parentElement;
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
+    if(!nameValidate) {
+        parentElement.classList.add('not-valid');
+        parentElement.classList.remove('valid');
+        parentElement.lastElementChild.hidden = false;
+    } if (emailValidate) {
+        parentElement.classList.add('valid');
+        parentElement.classList.remove('not-valid');
+        parentElement.lastElementChild.hidden = true;
+    }
     return nameValidate;
 }
 
 function creditCardNumberValidator() {
+    const parentElement = cardNumber.parentElement;
     const ccNumber = cardNumber.value;
-    const creditCardValidate = /^[\d]{13,16}$/.test(ccNumber)
+    const creditCardValidate = /^[\d]{13,16}$/.test(ccNumber);
+    if(!creditCardNumberValidate) {
+        parentElement.classList.add('not-valid');
+        parentElement.classList.remove('valid');
+        parentElement.lastElementChild.hidden = false;
+    } if (creditCardNumberValidate) {
+        parentElement.classList.add('valid');
+        parentElement.classList.remove('not-valid');
+        parentElement.lastElementChild.hidden = true;
+    }
     return creditCardValidate;
 }
 
 function creditCardZipCodeValidator() {
+    const parentElement = zipCode.parentElement;
     const zipNumber = zipCode.value;
     const zipCodeValidate = /^[\d]{5}$/.test(zipNumber);
+    if(!creditCardZipCodeValidate) {
+        parentElement.classList.add('not-valid');
+        parentElement.classList.remove('valid');
+        parentElement.lastElementChild.hidden = false;
+    } if (creditCardZipCodeValidate) {
+        parentElement.classList.add('valid');
+        parentElement.classList.remove('not-valid');
+        parentElement.lastElementChild.hidden = true;
+    }
     return zipCodeValidate;
 }
 
 function cvvCodeValidator() {
+    const parentElement = cvvNumber.parentElement;
     const cvv = cvvNumber.value;
     const cvvValidate = /^[\d]{3}$/.test(cvv);
+    if(!cvvValidate) {
+        parentElement.classList.add('not-valid');
+        parentElement.classList.remove('valid');
+        parentElement.lastElementChild.hidden = false;
+    } if (cvvValidate) {
+        parentElement.classList.add('valid');
+        parentElement.classList.remove('not-valid');
+        parentElement.lastElementChild.hidden = true;
+    }
     return cvvValidate;
 }
 
+const checkBoxes = document.querySelectorAll('[type="checkbox"]');
+
 function checkboxValidator () {
     let numberOfChecks = 0;
-    const checkBoxes = document.querySelectorAll('[type="checkbox"]');
     for(let i = 1; i < checkBoxes.length; i++) {
        if(checkBoxes[i].checked === true) {
            numberOfChecks += 1
@@ -180,10 +236,9 @@ function checkboxValidator () {
 
 
 form.addEventListener('submit', (e) => {
-    console.log(checkboxValidator() < 1)
-  
+    
     if(!nameValidator() && !emailValidator() && checkboxValidator() < 1) {
-        e.preventDefault();
+        e.preventDefault();   
     }
     
     if(paymentMethod.value === 'credit-card') {
@@ -192,3 +247,14 @@ form.addEventListener('submit', (e) => {
         }
     }
 });
+
+for(let i = 1; i < checkBoxes.length; i++) {
+    checkBoxes[i].addEventListener('focus', (e) => { 
+        checkBoxes[i].classList.add('focus');
+    });
+    
+    checkBoxes[i].addEventListener('blur', (e) => {
+        checkBoxes[i].parentElement.classList.remove('focus');
+    });
+ 
+ }
