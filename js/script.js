@@ -46,57 +46,56 @@ color.disabled = true;
     Add event listener to t-shirt design dropdown
 */ 
 design.addEventListener('change', (e) => {
+   const themeSelection = e.target;
    color.disabled = false;
    
    for(let i = 1; i < colorOptions.length; i++) {
-       //dropdown theme selection
-       let themeSelection = e.target.value;
-       console.log(themeSelection);
        //data theme attribute of selected theme
         let dataTheme = colorOptions[i].getAttribute('data-theme');
-        console.log(dataTheme);
+
+        //Updates color dropdown upon selections
+        colorOptions[0].textContent = 'Please select a color';
+        color.value = 'Please select a color';
 
         /*
             conditional statement - based on user's theme selection
             the color options for t-shirts will display
         */
-        if (themeSelection === dataTheme) {
+        if (themeSelection.value === dataTheme) {
             colorOptions[i].hidden = false;
-            colorOptions[i].setAttribute('selected', true);
-        } if(themeSelection !== dataTheme) {
+        } if(themeSelection.value !== dataTheme) {
             colorOptions[i].hidden = true;
-            colorOptions[i].setAttribute('selected', false);
         }
    }
 });
 
-
 // //STEP 6
 
-// /*
-//     Selecting elements: register for activities & total activity cost element
-// */
-// const activities = document.getElementById('activities');
-// const cost = document.getElementById('activities-cost');
+/*
+    Selecting elements: register for activities & total activity cost element
+*/
+const activities = document.getElementById('activities');
+const cost = document.getElementById('activities-cost');
 
-// /*
-//     Created event listener to keep track of activities selected and costs of each activity
-//     to return the total cost of selected activities
-// */
+/*
+    Created event listener to keep track of activities selected and costs of each activity
+    to return the total cost of selected activities
+*/
 
-// activities.addEventListener('change', (e) => {
-//     let totalCost = 0;
-//     const activityCost = e.target.getAttribute('data-cost');
-//     const checkboxStatus = e.target;
+let totalCost = 0;
+activities.addEventListener('change', (e) => {
+    const activityCost = e.target.getAttribute('data-cost');
+    const checkboxStatus = e.target;
+    console.log(checkboxStatus.checked);
     
-//     if(checkboxStatus.checked) {
-//         totalCost = +activityCost + totalCost;
-//     } else {
-//         totalCost = totalCost - +activityCost;
-//     }
+    if(checkboxStatus.checked) {
+        totalCost = +activityCost + totalCost;
+    } else {
+        totalCost = totalCost - +activityCost;
+    }
     
-//     cost.innerHTML = `Total: $${totalCost}`;
-// });
+    cost.innerHTML = `Total: $${totalCost}`;
+});
 
 // //STEP 7
 
