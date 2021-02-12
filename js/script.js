@@ -185,7 +185,7 @@ function cvvCodeValidator() {
 }
 
 function activityValidator() {
-    let activities = document.querySelectorAll("#activities-box label input");
+    let activities = document.querySelectorAll("#activities-box");
     let checkBoxStatus = false;
         
     for (let i = 0; i < activities.length; i++) {
