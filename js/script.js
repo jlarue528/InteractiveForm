@@ -153,7 +153,6 @@ function nameValidator() {
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
 
-    console.log(nameValidate);
     return nameValidate;
 }
 
@@ -161,7 +160,6 @@ function emailValidator() {
     const emailField = email.value;
     const emailValidate = /^[^@]+@[^@.]+\.[A-Z]+$/i.test(emailField);
 
-    console.log(emailValidate);
     return emailValidate;
 }
 
@@ -169,7 +167,6 @@ function creditCardNumberValidator() {
     const ccNumber = cardNumber.value;
     const creditCardValidate = /^[\d]{13,16}$/.test(ccNumber);
   
-    console.log(creditCardValidate);
     return creditCardValidate;
 }
 
@@ -196,7 +193,6 @@ function activityValidator() {
             checkBoxStatus = true;
         }
     }
-    console.log(checkBoxStatus);
     return checkBoxStatus;
 }
 
@@ -209,12 +205,13 @@ function failedValidationUpdate (childElement) {
 
 function passedValidationUpdate (childElement) {
     const parent = childElement.parentElement;
-        parent.classList.add('not-valid');
-        parent.classList.remove('valid');
+        parent.classList.add('valid');
+        parent.classList.remove('not-valid');
         parent.lastElementChild.hidden = true;
 }
 
 form.addEventListener('submit', (e) => {
+    //e.preventDefault();
 
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
@@ -271,7 +268,6 @@ form.addEventListener('submit', (e) => {
     } else {
         passedValidationUpdate(activities);
     }
-
 });
 
 //step 9
