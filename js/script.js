@@ -149,7 +149,6 @@ const form = document.getElementsByTagName('form')[0];
     Helper functions used to validate input fields
 */
 
-
 function nameValidator() {
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
@@ -189,7 +188,6 @@ function cvvCodeValidator() {
 }
 
 function failedValidationUpdate (childElement) {
-    //nameInput
     const parent = childElement.parentElement;
         parent.classList.add('not-valid');
         parent.classList.remove('valid');
@@ -197,7 +195,6 @@ function failedValidationUpdate (childElement) {
 }
 
 function passedValidationUpdate (childElement) {
-    //nameInput
     const parent = childElement.parentElement;
         parent.classList.add('not-valid');
         parent.classList.remove('valid');
