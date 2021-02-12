@@ -136,89 +136,155 @@ const form = document.getElementsByTagName('form')[0];
     Helper functions used to validate input fields
 */
 
+function updateParentElementClassList (childElement, classNameAddValue, classNameRemoveValue, displayValue) {
+    const parentElement = childElement.parentElement;
+    parentElement.classList.add(classNameAddValue);
+    parentElement.classList.remove(classNameRemoveValue);
+    parentElement.lastElementChild.hidden = displayValue;
+}
+
 function emailValidator() {
-    const parentElement = email.parentElement;
+    // const parentElement = email.parentElement;
     const emailField = email.value;
     const emailValidate = /^[^@]+@[^@.]+\.[A-Z]+$/i.test(emailField);
-    console.log(emailValidate);
     if(!emailValidate) {
-        parentElement.classList.add('not-valid');
-        parentElement.classList.remove('valid');
-        parentElement.lastElementChild.hidden = false;
-        console.log(parentElement);
+        updateParentElementClassList (
+            email, 
+            'not-valid', 
+            'valid', 
+            'false'
+        );
+        // parentElement.classList.add('not-valid');
+        // parentElement.classList.remove('valid');
+        // parentElement.lastElementChild.hidden = false;
     } if (emailValidate) {
-        parentElement.classList.add('valid');
-        parentElement.classList.remove('not-valid');
-        parentElement.lastElementChild.hidden = true;
-        console.log(parentElement);
+        updateParentElementClassList (
+            email, 
+            'not-valid', 
+            'valid', 
+            'false'
+        );
+        // parentElement.classList.add('valid');
+        // parentElement.classList.remove('not-valid');
+        // parentElement.lastElementChild.hidden = true;
     }
     return emailValidate;
 }
 
 
 function nameValidator() {
-    const parentElement = nameInput.parentElement;
+    // const parentElement = nameInput.parentElement;
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
     if(!nameValidate) {
-        parentElement.classList.add('not-valid');
-        parentElement.classList.remove('valid');
-        parentElement.lastElementChild.hidden = false;
+        updateParentElementClassList (
+            nameInput, 
+            'not-valid', 
+            'valid', 
+            'false'
+        );
+        // parentElement.classList.add('not-valid');
+        // parentElement.classList.remove('valid');
+        // parentElement.lastElementChild.hidden = false;
     } if (emailValidate) {
-        parentElement.classList.add('valid');
-        parentElement.classList.remove('not-valid');
-        parentElement.lastElementChild.hidden = true;
+        updateParentElementClassList (
+            nameInput, 
+            'valid', 
+            'not-valid', 
+            'true'
+        );
+        // parentElement.classList.add('valid');
+        // parentElement.classList.remove('not-valid');
+        // parentElement.lastElementChild.hidden = true;
     }
     return nameValidate;
 }
 
 function creditCardNumberValidator() {
-    const parentElement = cardNumber.parentElement;
+    // const parentElement = cardNumber.parentElement;
     const ccNumber = cardNumber.value;
     const creditCardValidate = /^[\d]{13,16}$/.test(ccNumber);
     if(!creditCardNumberValidate) {
-        parentElement.classList.add('not-valid');
-        parentElement.classList.remove('valid');
-        parentElement.lastElementChild.hidden = false;
+        updateParentElementClassList (
+            cardNumber, 
+            'not-valid', 
+            'valid', 
+            'false'
+        );
+        // parentElement.classList.add('not-valid');
+        // parentElement.classList.remove('valid');
+        // parentElement.lastElementChild.hidden = false;
     } if (creditCardNumberValidate) {
-        parentElement.classList.add('valid');
-        parentElement.classList.remove('not-valid');
-        parentElement.lastElementChild.hidden = true;
+        updateParentElementClassList (
+            cardNumber, 
+            'valid', 
+            'not-valid', 
+            'true'
+        );
+        // parentElement.classList.add('valid');
+        // parentElement.classList.remove('not-valid');
+        // parentElement.lastElementChild.hidden = true;
     }
     return creditCardValidate;
 }
 
 function creditCardZipCodeValidator() {
-    const parentElement = zipCode.parentElement;
+    // const parentElement = zipCode.parentElement;
     const zipNumber = zipCode.value;
     const zipCodeValidate = /^[\d]{5}$/.test(zipNumber);
     if(!creditCardZipCodeValidate) {
-        parentElement.classList.add('not-valid');
-        parentElement.classList.remove('valid');
-        parentElement.lastElementChild.hidden = false;
+        updateParentElementClassList (
+            zipCode, 
+            'not-valid', 
+            'valid', 
+            'false'
+        );
+        // parentElement.classList.add('not-valid');
+        // parentElement.classList.remove('valid');
+        // parentElement.lastElementChild.hidden = false;
     } if (creditCardZipCodeValidate) {
-        parentElement.classList.add('valid');
-        parentElement.classList.remove('not-valid');
-        parentElement.lastElementChild.hidden = true;
+        updateParentElementClassList (
+            cvvNumber, 
+            'valid', 
+            'not-valid', 
+            'true'
+        );
+        // parentElement.classList.add('valid');
+        // parentElement.classList.remove('not-valid');
+        // parentElement.lastElementChild.hidden = true;
     }
     return zipCodeValidate;
 }
 
 function cvvCodeValidator() {
-    const parentElement = cvvNumber.parentElement;
+    // const parentElement = cvvNumber.parentElement;
     const cvv = cvvNumber.value;
     const cvvValidate = /^[\d]{3}$/.test(cvv);
     if(!cvvValidate) {
-        parentElement.classList.add('not-valid');
-        parentElement.classList.remove('valid');
-        parentElement.lastElementChild.hidden = false;
+        updateParentElementClassList (
+            cvvNumber, 
+            'not-valid', 
+            'valid', 
+            'false'
+        );
+        // parentElement.classList.add('not-valid');
+        // parentElement.classList.remove('valid');
+        // parentElement.lastElementChild.hidden = false;
     } if (cvvValidate) {
-        parentElement.classList.add('valid');
-        parentElement.classList.remove('not-valid');
-        parentElement.lastElementChild.hidden = true;
+        updateParentElementClassList (
+            cvvNumber, 
+            'valid', 
+            'not-valid', 
+            'true'
+        );
+        // parentElement.classList.add('valid');
+        // parentElement.classList.remove('not-valid');
+        // parentElement.lastElementChild.hidden = true;
     }
     return cvvValidate;
 }
+
+
 
 const checkBoxes = document.querySelectorAll('[type="checkbox"]');
 
