@@ -187,6 +187,19 @@ function cvvCodeValidator() {
     return cvvValidate;
 }
 
+function activityValidator() {
+    let activities = document.querySelectorAll("#activities-box label input");
+    let checkBoxStatus = false;
+        
+    for (let i = 0; i < activities.length; i++) {
+        if (activities[i].checked) {
+            checkBoxStatus = true;
+        }
+    }
+    console.log(checkBoxStatus);
+    return checkBoxStatus;
+}
+
 function failedValidationUpdate (childElement) {
     const parent = childElement.parentElement;
         parent.classList.add('not-valid');
@@ -248,7 +261,17 @@ form.addEventListener('submit', (e) => {
         }   else {
             passedValidationUpdate(cvvNumber);
         }
-    }    
+    }
+
+    const checkBoxMinimum = activityValidator();
+
+    if(!checkBoxMinimum) {
+        failedValidationUpdate(activities);
+        e.preventDefault();
+    } else {
+        passedValidationUpdate(activities);
+    }
+
 });
 
 //step 9
