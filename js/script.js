@@ -205,7 +205,6 @@ function passedValidationUpdate (childElement) {
 }
 
 form.addEventListener('submit', (e) => {
-    // e.preventDefault();
 
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
