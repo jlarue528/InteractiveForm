@@ -1,6 +1,8 @@
 
 //STEP 3
 
+const checkboxList = document.querySelector('#activities');
+
 /*
     Selecting the name input & setting focus state to true -
     This will make the name input the default focus state
@@ -184,18 +186,6 @@ function cvvCodeValidator() {
     return cvvValidate;
 }
 
-function activityValidator() {
-    let activities = document.querySelectorAll("#activities-box");
-    let checkBoxStatus = false;
-        
-    for (let i = 0; i < activities.length; i++) {
-        if (activities[i].checked) {
-            checkBoxStatus = true;
-        }
-    }
-    return checkBoxStatus;
-}
-
 function failedValidationUpdate (childElement) {
     const parent = childElement.parentElement;
         parent.classList.add('not-valid');
@@ -260,13 +250,15 @@ form.addEventListener('submit', (e) => {
         }
     }
 
-    const checkBoxMinimum = activityValidator();
-
-    if(!checkBoxMinimum) {
-        failedValidationUpdate(activities);
+    if(totalCost < 100) {
         e.preventDefault();
+        checkboxList.classList.remove('valid')
+        checkboxList.classList.add('not-valid');
+        checkboxList.lastElementChild = 'block'; 
     } else {
-        passedValidationUpdate(activities);
+        checkboxList.classList.add('valid');
+        checkboxList.classList.remove('not-valid');
+        checkboxList.lastElementChild = 'none';
     }
 });
 
