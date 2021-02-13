@@ -240,5 +240,3 @@ for(let i = 0; i < checkBoxes.length; i++) {
         checkBoxParent.classList.remove('focus');
     });
 }
-
-restructured for readability
