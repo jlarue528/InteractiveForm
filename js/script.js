@@ -1,146 +1,19 @@
 
-//STEP 3
-
-const checkboxList = document.querySelector('#activities');
-
 /*
-    Selecting the name input & setting focus state to true -
-    This will make the name input the default focus state
+    DOM ELEMENTS
 */
 const nameInput = document.querySelector('input[type="text"]');
-nameInput.focus();
-
-//Step 4
-
-//Selecting Job Role Select Element
 const jobRole = document.getElementById('title');
-
-/*
-    Selecting Other Job Role Element & setting its display style to be hidden
-*/
 const otherJobRole = document.getElementById('other-job-role');
-otherJobRole.style.display = 'none';
-
-/*
-    Setting an event listener to watch job role element
-*/
-jobRole.addEventListener('change', (e) => {
-    const jobSelected = e.target.value;
-    if(jobSelected === 'other') {
-        otherJobRole.style.display = 'block';
-    } else {
-        otherJobRole.style.display = 'none';
-    }
-});
-
-//STEP 5
-
-//Selecting design & color elements
 const design = document.getElementById('design');
 const color = document.getElementById('color');
-const colorOptions = color.children;
-
-
-//Setting color property to disabled
-color.disabled = true;
-
-/*
-    Add event listener to t-shirt design dropdown
-*/ 
-design.addEventListener('change', (e) => {
-   const themeSelection = e.target;
-   color.disabled = false;
-   
-   for(let i = 1; i < colorOptions.length; i++) {
-       //data theme attribute of selected theme
-        let dataTheme = colorOptions[i].getAttribute('data-theme');
-
-        //Updates color dropdown upon selections
-        colorOptions[0].textContent = 'Please select a color';
-        color.value = 'Please select a color';
-
-        /*
-            conditional statement - based on user's theme selection
-            the color options for t-shirts will display
-        */
-        if (themeSelection.value === dataTheme) {
-            colorOptions[i].hidden = false;
-        } if(themeSelection.value !== dataTheme) {
-            colorOptions[i].hidden = true;
-        }
-   }
-});
-
-// //STEP 6
-
-/*
-    Selecting elements: register for activities & total activity cost element
-*/
 const activities = document.getElementById('activities');
+const checkboxList = document.querySelector('#activities');
 const cost = document.getElementById('activities-cost');
-
-/*
-    Created event listener to keep track of activities selected and costs of each activity
-    to return the total cost of selected activities
-*/
-
-let totalCost = 0;
-activities.addEventListener('change', (e) => {
-    const activityCost = e.target.getAttribute('data-cost');
-    const checkboxStatus = e.target;
-    
-    if(checkboxStatus.checked) {
-        totalCost = +activityCost + totalCost;
-    } else {
-        totalCost = totalCost - +activityCost;
-    }
-    
-    cost.innerHTML = `Total: $${totalCost}`;
-});
-
-// //STEP 7
-
-//Selecting payment method elements
 const paymentMethod = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
 const payPal = document.getElementById('paypal');
 const bitCoin = document.getElementById('bitcoin');
-/*
-    Hiding Paypal & bitCoin payment methods initially
-*/
-payPal.hidden = true;
-bitCoin.hidden = true;
-
-/*
-    setting default payment method to credit card
-*/
-paymentMethod.children[1].setAttribute('selected', true);
-
-/*
-    Event listener added to detect which payment method the user selects -
-    Based on the payment method selected a user will have next step payment options
-*/
-paymentMethod.addEventListener('change', (e) => {
-    const paymentSelection = e.target.value;
-       
-    if(paymentSelection === 'paypal') {
-           payPal.hidden = false;
-           bitCoin.hidden = true;
-           creditCard.hidden = true;
-    } if (paymentSelection === 'credit-card') {
-           payPal.hidden = true;
-           bitCoin.hidden = true;
-           creditCard.hidden = false;
-    } if (paymentSelection === 'bitcoin') {
-        payPal.hidden = true;
-        bitCoin.hidden = false;
-        creditCard.hidden = true;
-    }
-});
-
-//STEP 8
-
-//Selecting Elements
 const email = document.getElementById('email');
 const cardNumber = document.getElementById('cc-num');
 const zipCode = document.getElementById('zip');
@@ -148,9 +21,14 @@ const cvvNumber = document.getElementById('cvv');
 const form = document.getElementsByTagName('form')[0];
 
 /*
-    Helper functions used to validate input fields
+    Global Variables
 */
+let totalCost = 0;
+const colorOptions = color.children;
 
+/*
+    Helper Functions
+*/
 function nameValidator() {
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
@@ -200,8 +78,78 @@ function passedValidationUpdate (childElement) {
         parent.lastElementChild.hidden = true;
 }
 
+/*
+    Event Listeners
+*/
+jobRole.addEventListener('change', (e) => {
+    const jobSelected = e.target.value;
+    if(jobSelected === 'other') {
+        otherJobRole.style.display = 'block';
+    } else {
+        otherJobRole.style.display = 'none';
+    }
+});
+
+design.addEventListener('change', (e) => {
+    const themeSelection = e.target;
+    color.disabled = false;
+    
+    for(let i = 1; i < colorOptions.length; i++) {
+        //data theme attribute of selected theme
+         let dataTheme = colorOptions[i].getAttribute('data-theme');
+ 
+         //Updates color dropdown upon selections
+         colorOptions[0].textContent = 'Please select a color';
+         color.value = 'Please select a color';
+ 
+         /*
+             conditional statement - based on user's theme selection
+             the color options for t-shirts will display
+         */
+         if (themeSelection.value === dataTheme) {
+             colorOptions[i].hidden = false;
+         } if(themeSelection.value !== dataTheme) {
+             colorOptions[i].hidden = true;
+         }
+    }
+ });
+
+activities.addEventListener('change', (e) => {
+    const activityCost = e.target.getAttribute('data-cost');
+    const checkboxStatus = e.target;
+    
+    if(checkboxStatus.checked) {
+        totalCost = +activityCost + totalCost;
+    } else {
+        totalCost = totalCost - +activityCost;
+    }
+    
+    cost.innerHTML = `Total: $${totalCost}`;
+});
+
+paymentMethod.addEventListener('change', (e) => {
+    const paymentSelection = e.target.value;
+       
+    if(paymentSelection === 'paypal') {
+           payPal.hidden = false;
+           bitCoin.hidden = true;
+           creditCard.hidden = true;
+    } if (paymentSelection === 'credit-card') {
+           payPal.hidden = true;
+           bitCoin.hidden = true;
+           creditCard.hidden = false;
+    } if (paymentSelection === 'bitcoin') {
+        payPal.hidden = true;
+        bitCoin.hidden = false;
+        creditCard.hidden = true;
+    }
+});
+
+/*
+    Form Validation
+*/
+
 form.addEventListener('submit', (e) => {
-    // e.preventDefault();
 
     const nameField = nameInput.value;
     const nameValidate = /^[A-Za-z]+ ?[A-Za-z]+ ?[A-Za-z]+$/i.test(nameField);
@@ -262,7 +210,22 @@ form.addEventListener('submit', (e) => {
     }
 });
 
-//step 9
+/*
+    Styling
+*/
+
+nameInput.focus();
+otherJobRole.style.display = 'none';
+color.disabled = true;
+payPal.hidden = true;
+bitCoin.hidden = true;
+paymentMethod.children[1].setAttribute('selected', true);
+
+
+
+/*
+    Checkbox Styling
+*/
 
 const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 
@@ -277,3 +240,5 @@ for(let i = 0; i < checkBoxes.length; i++) {
         checkBoxParent.classList.remove('focus');
     });
 }
+
+restructured for readability
